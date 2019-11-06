@@ -18,6 +18,7 @@ from django.contrib import admin
 from home.views import index
 from accounts.views import login, logout
 from accounts import urls as accounts_urls
+from working import urls as workspace_urls
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -25,4 +26,5 @@ urlpatterns = [
     url(r'^logout', logout, name="logout"),
     url(r'^login', login, name="login"),
     url(r'^accounts/', include(accounts_urls)),
+    url(r'^workspaces/', include(workspace_urls)),
 ]
