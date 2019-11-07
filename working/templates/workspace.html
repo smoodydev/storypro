@@ -5,7 +5,7 @@
     <div class="col-sm-4">
         <h3>{{ content }}</h3>
         {% for b in books %}
-        <p>{{ b }}</p>
+        <a href="{% url 'book' content.id b.id %}"><p>{{ b }}</p></a>
         {% endfor %}
     </div>
 
