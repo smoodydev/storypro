@@ -29,3 +29,6 @@ def book(request, ws, id):
     content = get_object_or_404(Workspace, pk=ws)
     book = get_object_or_404(Book, pk=id)
     return render(request, "book.html", {"content":content, "book":book})
+
+def chapter(request):
+    return render(request, "chapter.html")
