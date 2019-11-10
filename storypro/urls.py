@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from home.views import index
+from home.views import index, testpage
 from accounts.views import login, logout
 from accounts import urls as accounts_urls
 from working import urls as workspace_urls
@@ -27,4 +27,5 @@ urlpatterns = [
     url(r'^login', login, name="login"),
     url(r'^accounts/', include(accounts_urls)),
     url(r'^workspaces/', include(workspace_urls)),
+    url(r'^error/', testpage, name="testpage"),
 ]

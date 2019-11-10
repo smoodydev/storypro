@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+
+
+{% block head_js %}
+{% load static %}
+<script src="{% static 'js/kandd.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+
+<canvas id="game"></canvas>
+
+{% endblock %}
