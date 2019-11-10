@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Workspace, Book
+from .models import Workspace, Book, Topic, Entry
 from .forms import WorkspaceForm, ChapterForm, BookForm
 
 # Create your views here.
@@ -31,4 +31,6 @@ def book(request, ws, id):
     return render(request, "book.html", {"content":content, "book":book})
 
 def chapter(request):
-    return render(request, "chapter.html")
+    topics = Topic.objects.all()
+    print(topics)
+    return render(request, "chapter.html", {"topics":topics})

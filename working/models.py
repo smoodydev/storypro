@@ -35,8 +35,17 @@ class Chapter(models.Model):
         else:
             return "Un-Named Chapter in "+ self.book
 
-class Topics(models.Model):
+class Topic(models.Model):
     workspace = models.ForeignKey(Workspace, related_name="topic")
+    shorthand = models.CharField(max_length=3, blank=True)
+    name = models.CharField(max_length=140, blank=False)
+    blurb = models.TextField(max_length=140, blank=True)
+
+    def __str__(self):
+        return self.name
+
+class Entry(models.Model):
+    topic = models.ForeignKey(Workspace, related_name="entries")
     name = models.CharField(max_length=140, blank=False)
     blurb = models.TextField(max_length=140, blank=True)
 

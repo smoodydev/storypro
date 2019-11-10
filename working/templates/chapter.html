@@ -1,18 +1,33 @@
 {% extends "base.html" %}
 
 {% block head_js %}
+
+{% load static %}
+
+<script>
+    var tags = [
+    {% for t in topics %}
+    "{{ t }}",
+    {% endfor %}
+    ];
+</script>
+<script src="{% static 'js/chapter.js' %}"></script>
+
 {% endblock %}
 
 {% block content %}
 <div class="container-fluid">
 <div class="row">
     <div class="col-md-8">
-        <textarea style="width: 100%">
+        <textarea style="width: 100%" onkeydown="keyCode(event)">
         </textarea>
     </div>
     <div class="col-md-4">
-        <textarea style="width: 100%">
-        </textarea>
+        <ul id="llist">
+            {% for t in topics %}
+            <li>{{ t }}</li>
+            {% endfor %}
+        </ul>
     </div>
 </div>
 </div>
