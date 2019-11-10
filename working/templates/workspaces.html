@@ -14,8 +14,8 @@
     <div class="row">
 
         {% for space in workspaces %}
-            <div class="col-sm-4" style="background-color: lightblue;">
-                <a href="{% url 'workspace' space.id %}"><h3 style="background-color: white;  margin: 15px">{{ space.name }}</h3></a>
+            <div class="col-sm-4">
+                <a href="{% url 'workspace' space.id %}"><h3>{{ space.name }}</h3></a>
             </div>
         {% endfor %}
     </div>
