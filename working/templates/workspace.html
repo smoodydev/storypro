@@ -1,23 +1,60 @@
 {% extends "base.html" %}
 
+{% load bootstrap_tags %}
+
 {% block content %}
 <div class="container">
-<div class="row">
-    <div class="col-sm-4">
-        {% for b in books %}
-        <a href="{% url 'book' content.id b.id %}"><p>{{ b }}</p></a>
-        {% endfor %}
-    </div>
-
-    <div class="col-sm-8">
-        <h3>Work Flow!</h3>
-        {% for b in books %}
-        <p>{{ b }}</p>
-        {% endfor %}
-    </div>
     
-    
+    <div class="row">
+        <div class="col-sm-4">
+            <h4>Your Books</h4>
+            {% for book in content.books.all %}
+            <a href="{% url 'book' content.id book.id %}"><p>{{ book }}</p></a>
+            {% endfor %}
+        </div>
+        <div class="col-sm-4">
+            <h4>Topics</h4>
+            {% for t in content.topic.all %}
+            <a href=""><p>{{ t }}</p></a>
+            {% endfor %}
+        </div>
+        
 
+        <div class="col-sm-4">
+            <h4>{{ content }}</h4>
+            <p>{{ content.blurb }}</p>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Update Workspace
+            </button>
+            
+        </div>
+        
+    </div>
 </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update Workspace</h5>
+      </div>
+            <form method="POST">
+            <div class="modal-body">
+                  
+                    {% csrf_token %}
+                    {{ wsform | as_bootstrap }}
+                    
+                    
+            </div>
+            <div class="modal-footer">
+                <input class="btn btn-primary float-right" type="submit" value="Update">
+            </div>
+            </form>
+        </div>
+    </div>
 </div>
+
+
 {% endblock %}

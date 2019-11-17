@@ -1,34 +1,36 @@
 {% extends "base.html" %}
-
+{% load bootstrap_tags %}
 {% block content %}
 
 <div class="container">
-<div class="row">
-    <h1>{{ book }}</h1>
-</div>
-<div class="row">
-    <div class="col-sm-12">
-    <div class="accordion" id="accordionExample">
-        {% for chapter in book.chapters.all|dictsort:"chap_num" %}
-        <div class="card">
-            <div class="card-header" id="heading{{ chapter.chap_num }}">
-                <h2 class="mb-0">
-                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse{{ chapter.chap_num }}" aria-expanded="false" aria-controls="collapseTwo">
-                        {{ chapter.chap_num }}: {{ chapter.title }}
-                    </button>
-                </h2>
+    <div class="row">
+        <h1>{{ book }}</h1>
+    </div>
+    <div class="row">
+        <a class="btn btn-primary" href="{% url 'createworkspace' %}"><h3>Create Workspace</h3></a>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+        <div class="accordion" id="accordionExample">
+            {% for chapter in book.chapters.all|dictsort:"chap_num" %}
+            <div class="card">
+                <div class="card-header" id="heading{{ chapter.chap_num }}">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse{{ chapter.chap_num }}" aria-expanded="false" aria-controls="collapseTwo">
+                            {{ chapter.chap_num }}: {{ chapter.title }}
+                        </button>
+                    </h2>
+                </div>
+            <div id="collapse{{ chapter.chap_num }}" class="collapse" aria-labelledby="heading{{ chapter.chap_num }}" data-parent="#accordionExample">
+                <div class="card-body">
+                {{ chapter.content }}
+                </div>
+                </div>
             </div>
-        <div id="collapse{{ chapter.chap_num }}" class="collapse" aria-labelledby="heading{{ chapter.chap_num }}" data-parent="#accordionExample">
-            <div class="card-body">
-            {{ chapter.content }}
-            </div>
-            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
+        </div>
     </div>
-    </div>
-</div>
-    <h3>something goes here</h3>
 </div>
 
 {% endblock %}

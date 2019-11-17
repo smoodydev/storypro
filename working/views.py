@@ -35,11 +35,15 @@ def createchapter(request):
     return render(request, "createworkspace.html", {"form":form})
 
 def workspace(request, id):
-    print("doing this")
+    if request.method =="POST":
+        ws = get_object_or_404(Workspace, pk=id)
+        ws.name = request.POST.get('name')
+        ws.blurb = request.POST.get('blurb')
+        ws.save()
     content = get_object_or_404(Workspace, pk=id)
-    books = Book.objects.filter(workspace=content.id)
+    wsform = WorkspaceForm(instance=content)
     form = BookForm()
-    return render(request, "workspace.html", {"content":content, "books":books, "form": form})
+    return render(request, "workspace.html", {"content":content, "form": form, "wsform": wsform})
 
 def book(request, ws, id):
     content = get_object_or_404(Workspace, pk=ws)
@@ -49,8 +53,9 @@ def book(request, ws, id):
 def chapter(request, ws, id, ch):
     if request.method =="POST":
         print("Post")
-        chapter = request.form()
+        chapter = request.form(commit=False)
+        chapter.book = get_object_or_404(Book, pk=id)
+        chapter.save()
         print(chapter)
     topics = Topic.objects.all()
-    print(topics)
     return render(request, "chapter.html", {"topics":topics})
