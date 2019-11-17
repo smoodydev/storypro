@@ -19,11 +19,22 @@
 <div class="container-fluid">
 <div class="row">
     <div class="col-md-8">
-        <textarea style="width: 100%" onkeydown="keyCode(event)">
+    <form method="POST">
+    {% csrf_token %}
+        <textarea style="width: 100%">
         </textarea>
+        <input type="submit">
+    </form>
     </div>
     <div class="col-md-4">
+        Than
         <ul id="llist">
+            {% for t in topics %}
+            <li>{{ t }}</li>
+            {% endfor %}
+        </ul>
+        this
+        <ul id="alist">
             {% for t in topics %}
             <li>{{ t }}</li>
             {% endfor %}

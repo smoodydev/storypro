@@ -4,7 +4,6 @@
 <div class="container">
 <div class="row">
     <div class="col-sm-4">
-        <h3>{{ content }}</h3>
         {% for b in books %}
         <a href="{% url 'book' content.id b.id %}"><p>{{ b }}</p></a>
         {% endfor %}
@@ -16,6 +15,8 @@
         <p>{{ b }}</p>
         {% endfor %}
     </div>
+    
+    
 
 </div>
 </div>
